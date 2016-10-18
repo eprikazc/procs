@@ -1,7 +1,10 @@
+import uuid
+
 from django.db import models
 
 
 class Proc(models.Model):
+    long_id = models.CharField(max_length=36, default=uuid.uuid4)
     name = models.CharField(max_length=30)
     state = models.CharField(max_length=30, blank=True)
     address = models.CharField(max_length=255, blank=True)
