@@ -1,0 +1,44 @@
+{% extends "admin/change_list.html" %}
+{% load admin_list %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <style>
+  .proc-icon.glyphicon {
+    font-size: 5em;
+    margin-bottom: .1em;
+    display: block;
+  }
+  </style>
+{% endblock %}
+
+{% block result_list %}
+<div class="results">
+  <table id="result_list" class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col" class="action-checkbox-column">
+           <span><input type="checkbox" id="action-toggle" style="display: inline-block;"></span>
+        </th>
+        <th scope="col" class="column-__str__">
+           <span>Proc</span>
+        </th>
+      </tr>
+    </thead>
+  <tbody>
+
+  {% for item in cl.result_list %}
+  <tr class="row{{ item.id }}">
+    <td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="{{ item.id }}"></td>
+    <th class="field-__str__">
+      <a href="/admin/core/proc/{{ item.id }}/change/">
+        <span class="proc-icon glyphicon glyphicon-th-list"></span>
+        <span>{{ item }}</span>
+      </a>
+    </th>
+  </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+</div>
+{% endblock %}

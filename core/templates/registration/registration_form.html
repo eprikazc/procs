@@ -1,0 +1,35 @@
+{% extends "registration/registration_base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Register for an account" %}{% endblock %}
+{% block styles %}
+<link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet"/>
+<style type="text/css">
+form {
+    max-width: 380px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+}
+form label,
+form input {
+  display: block;
+}
+form p {
+  margin-bottom: 20px;
+}
+.errorlist li {
+  color: #a94442;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<form method="post" action="">
+    {% csrf_token %}
+    <h2>Registration</h2>
+    {{ form.as_p }}
+    <input type="submit" value="{% trans 'Submit' %}" class="btn btn-info btn-lg btn-block"/>
+</form>
+{% endblock %}
