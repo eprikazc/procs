@@ -11,6 +11,8 @@ class Proc(models.Model):
     phone = models.CharField(max_length=30, blank=True)
     start_date = models.DateField()
     status = models.BooleanField()
+    contact_person = models.ForeignKey('Person', blank=True, null=True, related_name='+')
+    delivery_person = models.ForeignKey('Person', blank=True, null=True, related_name='+')
     last_updated = models.DateField(auto_now=True)
 
     def __str__(self):
