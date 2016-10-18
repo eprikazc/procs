@@ -72,10 +72,10 @@ class Person(models.Model):
     class Meta:
         verbose_name_plural = "people"
     name = models.CharField(max_length=30)
-    address = models.CharField(max_length=255)
     phone = models.CharField(max_length=30)
-    title = models.CharField(max_length=30)
-    notes = models.TextField()
+    title = models.CharField(max_length=30, blank=True)
+    address = models.CharField(max_length=255, blank=True)
+    notes = models.TextField(blank=True)
     docs = models.ManyToManyField(Doc, blank=True)
 
     def __str__(self):
