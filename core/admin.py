@@ -18,6 +18,11 @@ class MoneyInline(admin.TabularInline):
     extra = 1
 
 
+class DocInline(admin.TabularInline):
+    model = Doc
+    extra = 1
+
+
 class ProcAdmin(admin.ModelAdmin):
     inlines = [
         BreadInline, HatInline, MoneyInline
