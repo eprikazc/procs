@@ -9,36 +9,31 @@
     margin-bottom: .1em;
     display: block;
   }
+  .results.grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .item {
+    flex: 1 200px;
+    max-width: 200px;
+  }
+  .item-name {
+    background-image: url('/static/core/img/doc.png');
+    background-size: 100% 80%;
+    background-repeat: no-repeat;
+    padding-top: 85%;
+    margin: 2%;
+    text-align: center;
+  }
   </style>
 {% endblock %}
 
 {% block result_list %}
-<div class="results">
-  <table id="result_list" class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th scope="col" class="action-checkbox-column">
-           <span><input type="checkbox" id="action-toggle" style="display: inline-block;"></span>
-        </th>
-        <th scope="col" class="column-__str__">
-           <span>Proc</span>
-        </th>
-      </tr>
-    </thead>
-  <tbody>
-
+<div class="results grid">
   {% for item in cl.result_list %}
-  <tr class="row{{ item.id }}">
-    <td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="{{ item.id }}"></td>
-    <th class="field-__str__">
-      <a href="/admin/core/proc/{{ item.id }}/change/">
-        <span class="proc-icon glyphicon glyphicon-th-list"></span>
-        <span>{{ item }}</span>
-      </a>
-    </th>
-  </tr>
+    <a class="item" href="/admin/core/proc/{{ item.id }}/change/">
+      <div class="item-name">{{ item }}</div>
+    </a>
   {% endfor %}
-  </tbody>
-  </table>
 </div>
 {% endblock %}

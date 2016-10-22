@@ -27,6 +27,7 @@ class ProcAdmin(admin.ModelAdmin):
     inlines = [
         BreadInline, HatInline, MoneyInline
     ]
+    actions_on_top = False
 
 
 admin.site.register(Proc, ProcAdmin)
