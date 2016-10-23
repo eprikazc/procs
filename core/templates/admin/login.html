@@ -68,7 +68,7 @@
     {{ form.password.label_tag }}
     <p class="text-danger">{{ form.password.errors|striptags }}</p>
     {% dab_field_rendering form.password %}
-    <input type="hidden" name="next" value="{{ next }}" />
+    <input type="hidden" name="next" value="{% url "admin:core_proc_changelist" %}" />
   </div>
   {% url 'admin_password_reset' as password_reset_url %}
   {% if password_reset_url %}
