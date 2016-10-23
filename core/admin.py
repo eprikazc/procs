@@ -3,6 +3,10 @@ from django.contrib import admin
 from .models import Proc, Bread, Hat, Money, Doc, Person
 
 
+class GridAdmin(admin.ModelAdmin):
+    actions_on_top = False
+    change_list_template = 'admin/grid_change_list.html'
+
 class BreadInline(admin.TabularInline):
     model = Bread
     extra = 1
@@ -23,12 +27,11 @@ class DocInline(admin.TabularInline):
     extra = 1
 
 
-class ProcAdmin(admin.ModelAdmin):
+class ProcAdmin(GridAdmin):
     inlines = [
         BreadInline, HatInline, MoneyInline
     ]
-    actions_on_top = False
 
 
 admin.site.register(Proc, ProcAdmin)
-admin.site.register([Bread, Hat, Money, Doc, Person])
+admin.site.register([Bread, Hat, Money, Doc, Person], GridAdmin)
