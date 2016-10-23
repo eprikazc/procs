@@ -19,7 +19,7 @@ from django.conf.urls import url, include
 from django.conf import settings
 from django.contrib import admin
 
-from core.views import CustomRegistrationView
+from core.views import CustomRegistrationView, router
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,6 +27,8 @@ urlpatterns = [
         CustomRegistrationView.as_view(),
         name='registration_register'),
     url(r'^accounts/', include(registration.backends.default.urls)),
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 
