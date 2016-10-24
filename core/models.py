@@ -34,7 +34,7 @@ class Bread(models.Model):
 
 
 class Hat(models.Model):
-    long_id = models.CharField(max_length=30, unique=True)
+    long_id = models.CharField(max_length=36, unique=True, default=uuid.uuid4)
     grant = models.CharField(max_length=30)
     status = models.CharField(max_length=30)
     price = models.DecimalField(max_digits=7, decimal_places=2)
@@ -60,7 +60,7 @@ class Money(models.Model):
 
 
 class Doc(models.Model):
-    long_id = models.CharField(max_length=30, unique=True)
+    long_id = models.CharField(max_length=36, unique=True, default=uuid.uuid4)
     effective = models.DateField()
     expires = models.DateField()
     checked = models.BooleanField()
