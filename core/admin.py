@@ -1,6 +1,7 @@
 from django.contrib import admin
+from mptt.admin import DraggableMPTTAdmin
 
-from .models import Proc, Bread, Hat, Money, Doc, Person
+from .models import Proc, Bread, Hat, Money, Doc, DocNode, Person
 
 
 class GridAdmin(admin.ModelAdmin):
@@ -34,5 +35,19 @@ class ProcAdmin(GridAdmin):
     ]
 
 
+class DocNodeAdmin(DraggableMPTTAdmin):
+    inlines = [
+        DocInline,
+    ]
+    list_display = [
+        'tree_actions',
+        'indented_title',
+    ]
+    list_display_links = [
+        'indented_title',
+    ]
+
+
 admin.site.register(Proc, ProcAdmin)
+admin.site.register(DocNode, DocNodeAdmin)
 admin.site.register([Bread, Hat, Money, Doc, Person], GridAdmin)
