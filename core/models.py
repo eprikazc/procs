@@ -67,14 +67,14 @@ class Doc(models.Model):
     checked = models.BooleanField()
     link = models.URLField(blank=True)
     proc = models.ForeignKey(Proc)
-    root_node = models.ForeignKey('DocNode', blank=True, null=True)
+    root_node = models.ForeignKey('DocsNode', blank=True, null=True)
     icon = models.URLField(max_length=1000, blank=True)
 
     def __str__(self):
         return '%s, %s' % (self.proc, self.long_id)
 
 
-class DocNode(MPTTModel):
+class DocsNode(MPTTModel):
     parent = TreeForeignKey(
         'self',
         null=True,

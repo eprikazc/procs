@@ -1,7 +1,7 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 
-from .models import Proc, Bread, Hat, Money, Doc, DocNode, Person
+from .models import Proc, Bread, Hat, Money, Doc, DocsNode, Person
 
 
 class GridAdmin(admin.ModelAdmin):
@@ -49,5 +49,5 @@ class DocNodeAdmin(DraggableMPTTAdmin):
 
 
 admin.site.register(Proc, ProcAdmin)
-admin.site.register(DocNode, DocNodeAdmin)
+admin.site.register(DocsNode, DocNodeAdmin)
 admin.site.register([Bread, Hat, Money, Doc, Person], GridAdmin)
