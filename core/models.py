@@ -16,6 +16,7 @@ class Proc(models.Model):
     delivery_person = models.ForeignKey(
         'Person', blank=True, null=True, related_name='+')
     last_updated = models.DateField(auto_now=True)
+    icon = models.URLField(max_length=1000, blank=True)
 
     def __str__(self):
         return self.name
@@ -78,7 +79,7 @@ class Person(models.Model):
     title = models.CharField(max_length=30, blank=True)
     address = models.CharField(max_length=255, blank=True)
     notes = models.TextField(blank=True)
-    docs = models.ManyToManyField(Doc, blank=True)
+    icon = models.URLField(max_length=1000, blank=True)
 
     def __str__(self):
         return self.name
