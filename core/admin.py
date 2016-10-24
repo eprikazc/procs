@@ -7,6 +7,7 @@ class GridAdmin(admin.ModelAdmin):
     actions_on_top = False
     change_list_template = 'admin/grid_change_list.html'
 
+
 class BreadInline(admin.TabularInline):
     model = Bread
     extra = 1
