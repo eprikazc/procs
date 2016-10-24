@@ -31,7 +31,7 @@ class DocInline(admin.TabularInline):
 
 class ProcAdmin(GridAdmin):
     inlines = [
-        BreadInline, HatInline, MoneyInline
+        BreadInline, HatInline, MoneyInline, DocInline,
     ]
 
 
