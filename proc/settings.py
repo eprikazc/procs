@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_admin_bootstrapped',
     'django_showurls',
+    'mptt',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',

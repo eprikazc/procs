@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Proc(models.Model):
@@ -66,9 +67,32 @@ class Doc(models.Model):
     checked = models.BooleanField()
     link = models.URLField(blank=True)
     proc = models.ForeignKey(Proc)
+    root_node = models.ForeignKey('DocNode', blank=True, null=True)
+    icon = models.URLField(max_length=1000, blank=True)
 
     def __str__(self):
         return '%s, %s' % (self.proc, self.long_id)
+
+
+class DocNode(MPTTModel):
+    parent = TreeForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        related_name='children',
+        db_index=True)
+    long_id = models.CharField(
+        max_length=36,
+        unique=True,
+        default=uuid.uuid4)
+    title = models.CharField(max_length=30)
+    address = models.CharField(max_length=255, blank=True)
+    content = models.CharField(max_length=255, blank=True)
+    deadlines = models.CharField(max_length=255, blank=True)
+    people = models.ManyToManyField('Person', blank=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Person(models.Model):
