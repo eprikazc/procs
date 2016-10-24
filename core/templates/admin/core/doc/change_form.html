@@ -1,0 +1,20 @@
+{% extends "admin/change_form.html" %}
+{% load mptt_tags %}
+
+{% block after_related_objects %}
+{% with obj=adminform.form.instance.root_node %}
+  {% if obj is not None %}
+    <h3>Docs node hierarchy</h3>
+    {% drilldown_tree_for_node obj as drilldown %}
+    {% for node, structure in drilldown|tree_info %}
+        {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
+        {% ifequal node obj %}
+            <strong>{{ node.title }}</strong>
+        {% else %}
+        <a href="{% url "admin:core_docsnode_change" node.id %}">{{ node.title }}</a>
+        {% endifequal %}
+        {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+{% endblock %}
