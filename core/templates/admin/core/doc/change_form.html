@@ -5,16 +5,48 @@
 {% with obj=adminform.form.instance.root_node %}
   {% if obj is not None %}
     <h3>Docs node hierarchy</h3>
+
     {% drilldown_tree_for_node obj as drilldown %}
-    {% for node, structure in drilldown|tree_info %}
-        {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
-        {% ifequal node obj %}
-            <strong>{{ node.title }}</strong>
-        {% else %}
-        <a href="{% url "admin:core_docsnode_change" node.id %}">{{ node.title }}</a>
-        {% endifequal %}
-        {% for level in structure.closed_levels %}</li></ul>{% endfor %}
-    {% endfor %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Parents</th>
+          <th>Title</th>
+          <th>Id</th>
+          <th>Address</th>
+          <th>Content</th>
+          <th>Deadlines</th>
+          <th>People</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for node, structure in drilldown|tree_info %}
+          <tr>
+            <td>{{ node.get_ancestors|tree_path }} ::</td>
+            <td>
+              <a href="{% url "admin:core_docsnode_change" node.id %}">
+              {% if node == obj %}
+                <strong>{{ node.title }}</strong>
+              {% else %}
+                {{ node.title }}
+              {% endif%}
+              </a>
+            </td>
+            <td>{{ node.long_id }}</td>
+            <td>{{ node.address }}</td>
+            <td>{{ node.content }}</td>
+            <td>{{ node.deadlines }}</td>
+            <td>
+              <ul>
+              {% for person in node.people.all %}
+                <li>{{ person }}</li>
+              {% endfor %}
+              </ul>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   {% endif %}
 {% endwith %}
 {% endblock %}
