@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_showurls',
     'mptt',
     'rest_framework',
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
