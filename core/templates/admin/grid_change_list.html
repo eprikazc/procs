@@ -35,12 +35,21 @@
     max-width: 200px;
   }
   .item-name {
+    margin: 2%;
+    text-align: center;
+  }
+  .default-icon {
     background-image: url('/static/core/img/doc.png');
     background-size: 100% 80%;
     background-repeat: no-repeat;
     padding-top: 85%;
-    margin: 2%;
-    text-align: center;
+  }
+  .item img {
+    display: block;
+    width: 155px;
+    height: 155px;
+    object-fit: cover;
+    margin: 5% auto;
   }
   </style>
 {% endblock %}
@@ -64,7 +73,14 @@
 <div class="results grid">
   {% for item in cl.result_list %}
   <a class="item" href="{% url_for_result cl item %}">
-      <div class="item-name">{{ item }}</div>
+      {% if item.icon == "" %}
+        <div class="item-name default-icon">{{ item }}</div>
+      {% else %}
+        <div class="item-name">
+          <img src="{{ item.icon.url }}">
+          {{ item }}
+        </div>
+      {% endif %}
     </a>
   {% endfor %}
 </div>
